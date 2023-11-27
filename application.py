@@ -58,7 +58,36 @@ def run():
     showAccountMenu()
 
 def showMainMenu():
-    pass
+    while True:
+        user_selection = input("Welcome to the Programming Bank\n\nTo select an option, type in a corresponding number:\n\nOpen Account [1]\nSelect Account [2]\nExit [3]\n\n")
+        if user_selection == "1":
+            pass
+        elif user_selection == "2":
+            print("\nShowing Account...\n")
+            showAccountMenu()
+        elif user_selection == "3":
+            print("\nThank you for using Programming Bank!\n")
+            exit()
+        else:
+            print("\nThat is not a valid option.\n")
 
 def showAccountMenu():
-    pass
+    while True:
+        user_selection = input("\nCheck Balance [1]\nDeposit [2]\nWithdraw [3]\nExit Account [4]")
+        if user_selection == "1":
+            Account.getCurrentBalance()
+            break
+        elif user_selection == "2":
+            Account.deposit()
+            break
+        elif user_selection == "3":
+            Account.withdraw()
+            break
+        elif user_selection == "4":
+            showMainMenu()
+            break
+        else:
+            print("\nThat is not a valid option.\n")
+
+#! Program execution
+run()
