@@ -1,6 +1,7 @@
 # Assignment 3
 # 2023-12-1
 # Jeremy Tica
+import os
 
 class Account:
     def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance):
@@ -53,6 +54,8 @@ class ChequingAccount(Account):
 
 
 list_of_accounts = []
+account_numbers = []
+
 def run():
     showMainMenu()
     showAccountMenu()
@@ -61,9 +64,10 @@ def showMainMenu():
     while True:
         user_selection = input("Welcome to the Programming Bank\n\nTo select an option, type in a corresponding number:\n\nOpen Account [1]\nSelect Account [2]\nExit [3]\n\n")
         if user_selection == "1":
+            os.system('cls')
             new_account_number()    
         elif user_selection == "2":
-            print("\nShowing Account...\n")
+            os.system('cls')
             showAccountMenu()
         elif user_selection == "3":
             print("\nThank you for using Programming Bank!\n")
@@ -72,16 +76,46 @@ def showMainMenu():
             print("\nThat is not a valid option.\n")
 
 def showAccountMenu():
-    while True:
-        user_selection = input("\nCheck Balance [1]\nDeposit [2]\nWithdraw [3]\nExit Account [4]")
+    account_menu = False
+    show_existing_accounts = False
+    choose_existing_account = False
+
+    if list_of_accounts == []:
+        os.system('cls')
+        print("\nThere are no existing accounts\n")
+    else:
+        print("\nShowing Existing Account(s)...\n")
+        show_existing_accounts = True
+
+    while show_existing_accounts:
+        for existing_accounts in list_of_accounts:
+            account_numbers.append(existing_accounts.getAccountNumber())
+            print("Bank Account: ", existing_accounts.getAccountNumber())
+            index_number = list_of_accounts.index(existing_accounts)
+
+        choose_existing_account = True
+        show_existing_accounts = False
+
+    while choose_existing_account:
+        existing_account = input("\nPlease select an existing account by inputting the account number: \n\n")
+        for existing_accounts in list_of_accounts:
+            if existing_account == existing_accounts.getAccountNumber():
+                selected_account = existing_accounts.getAccountNumber()
+                account_menu = True
+                choose_existing_account = False
+            else:
+                print("\nThat account does not exist!\n")
+
+    while account_menu:
+        user_selection = input("\nCheck Balance [1]\nDeposit [2]\nWithdraw [3]\nExit Account [4]\n\n")
         if user_selection == "1":
-            Account.getCurrentBalance()
+            print("\nCurrent Balance: $ "+ str(list_of_accounts[index_number].getCurrentBalance()) + "\n")
             break
         elif user_selection == "2":
-            Account.deposit()
+            print("\nCurrent Balance: $ "+ str(list_of_accounts[index_number].deposit()) + "\n")
             break
         elif user_selection == "3":
-            Account.withdraw()
+            print("\nCurrent Balance: $ "+ str(list_of_accounts[index_number].withdraw()) + "\n")
             break
         elif user_selection == "4":
             showMainMenu()
@@ -113,13 +147,15 @@ def new_account_rate_of_interest():
         try:
             float(rate_of_interest)
             new_account()
+            break
         except ValueError:
             print("Please input a valid format")
 
 def new_account():
     account = Account(account_number, holder_name, rate_of_interest, 0)
     list_of_accounts.append(account)
-    print("Account Successfully Created")
+    os.system('cls')
+    print("\nAccount Successfully Created\n")
 
 #! Program execution
 run()
