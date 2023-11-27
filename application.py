@@ -52,7 +52,7 @@ class ChequingAccount(Account):
         super().__init__()
 
 
-
+list_of_accounts = []
 def run():
     showMainMenu()
     showAccountMenu()
@@ -61,7 +61,7 @@ def showMainMenu():
     while True:
         user_selection = input("Welcome to the Programming Bank\n\nTo select an option, type in a corresponding number:\n\nOpen Account [1]\nSelect Account [2]\nExit [3]\n\n")
         if user_selection == "1":
-            pass
+            new_account_number()    
         elif user_selection == "2":
             print("\nShowing Account...\n")
             showAccountMenu()
@@ -88,6 +88,38 @@ def showAccountMenu():
             break
         else:
             print("\nThat is not a valid option.\n")
+
+def new_account_number():
+    while True:
+        global account_number
+        account_number = input("Input a new account number formatted XXXXX all numbers: ")
+        if account_number.isnumeric() and len(account_number) == 5:
+            new_account_holder_name()
+            break
+        else:
+            print("Please input a valid format")
+
+def new_account_holder_name():
+    while True:
+        global holder_name
+        holder_name = input("Input a new holder name: ")
+        new_account_rate_of_interest()
+        break
+        
+def new_account_rate_of_interest():
+    while True:
+        global rate_of_interest
+        rate_of_interest = input("Input a rate of interest: ")
+        try:
+            float(rate_of_interest)
+            new_account()
+        except ValueError:
+            print("Please input a valid format")
+
+def new_account():
+    account = Account(account_number, holder_name, rate_of_interest, 0)
+    list_of_accounts.append(account)
+    print("Account Successfully Created")
 
 #! Program execution
 run()
