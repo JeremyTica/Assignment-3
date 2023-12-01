@@ -2,8 +2,38 @@
 # 2023-12-1
 # Jeremy Tica
 import os
+class Program:
+    def __init__():
+        def run():
+            dfshowMainMenu()
+            showAccountMenu()
 
-class Account:
+def showMainMenu():
+    while True:
+        user_selection = input("Welcome to the Programming Bank\n\nTo select an option, type in a corresponding number:\n\nOpen Account [1]\nSelect Account [2]\nExit [3]\n\n")
+        if user_selection == "1":
+            os.system('cls')
+            new_account_number()    
+        elif user_selection == "2":
+            os.system('cls')
+            showAccountMenu()
+        elif user_selection == "3":
+            print("\nThank you for using Programming Bank!\n")
+            exit()
+        else:
+            os.system('cls')
+            print("\nThat is not a valid option.\n")
+class Bank:
+    def __init__(self):
+        self.__bankName = "The Greatest Bank"
+        self.__list_of_accounts = []
+    
+    def openAccount():
+        pass
+
+    def searchAccount():
+        pass
+class Account(Bank):
     def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance):
         self.__accountNumber = accountNumber
         self.__accountHolderName = accountHolderName
@@ -36,16 +66,26 @@ class Account:
         self.__currentBalance = currentBalance
 
 
-    def deposit():
-        pass
+    def deposit(self, intended_deposit):
+        self.__currentBalance += intended_deposit
 
-    def withdraw():
-        pass
+    def withdraw(self, intended_withdrawal):
+        self.__currentBalance -= intended_withdrawal
+        if self.__currentBalance < 0:
+            self.__currentBalance += intended_withdrawal
+            print("Cannot make transaction. Invalid funds.")
 
 
 class SavingsAccount(Account):
     def __init__(self):
         super().__init__()
+        self.__minimum_balance = 5000
+    
+    def savings_withdraw(self):
+        if self.__currentBalance < self.__minimum_balance:
+            return False
+
+
 
 
 class ChequingAccount(Account):
@@ -55,25 +95,6 @@ class ChequingAccount(Account):
 
 list_of_accounts = []
 account_numbers = []
-
-def run():
-    showMainMenu()
-    showAccountMenu()
-
-def showMainMenu():
-    while True:
-        user_selection = input("Welcome to the Programming Bank\n\nTo select an option, type in a corresponding number:\n\nOpen Account [1]\nSelect Account [2]\nExit [3]\n\n")
-        if user_selection == "1":
-            os.system('cls')
-            new_account_number()    
-        elif user_selection == "2":
-            os.system('cls')
-            showAccountMenu()
-        elif user_selection == "3":
-            print("\nThank you for using Programming Bank!\n")
-            exit()
-        else:
-            print("\nThat is not a valid option.\n")
 
 def showAccountMenu():
     account_menu = False
@@ -100,7 +121,6 @@ def showAccountMenu():
         existing_account = input("\nPlease select an existing account by inputting the account number: \n\n")
         for existing_accounts in list_of_accounts:
             if existing_account == existing_accounts.getAccountNumber():
-                selected_account = existing_accounts.getAccountNumber()
                 account_menu = True
                 choose_existing_account = False
             else:
@@ -112,15 +132,20 @@ def showAccountMenu():
             print("\nCurrent Balance: $ "+ str(list_of_accounts[index_number].getCurrentBalance()) + "\n")
             break
         elif user_selection == "2":
-            print("\nCurrent Balance: $ "+ str(list_of_accounts[index_number].deposit()) + "\n")
+            intended_deposit = float(input("Please input your desired amount to be deposited: "))
+            deposit = list_of_accounts[index_number].deposit(intended_deposit)
+            print("$" + str(deposit) + " has been deposited.")
             break
         elif user_selection == "3":
-            print("\nCurrent Balance: $ "+ str(list_of_accounts[index_number].withdraw()) + "\n")
+            intended_withdrawal = float(input("Please input your desired amount to be withdrawn: "))
+            withdrawal = list_of_accounts[index_number].withdraw(intended_withdrawal)
+            print("$" + str(withdrawal) + "has been withdrawn.")
             break
         elif user_selection == "4":
             showMainMenu()
             break
         else:
+            os.system('cls')
             print("\nThat is not a valid option.\n")
 
 def new_account_number():
