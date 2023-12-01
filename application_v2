@@ -1,0 +1,97 @@
+# Assignment 3; Version 2
+# 2023-12-01
+# Jeremy Tica
+import os
+
+class Program:
+    def __init__():
+        def showMainMenu():
+            while True:
+                user_selection = input("Welcome to the Programming Bank\n\nTo select an option, type in a corresponding number:\n\nOpen Account [1]\nSelect Account [2]\nExit [3]\n\n")
+                if user_selection == "1":
+                    os.system('cls')
+                    #!new_account_number()    
+                elif user_selection == "2":
+                    os.system('cls')
+                    showAccountMenu()
+                elif user_selection == "3":
+                    print("\nThank you for using Programming Bank!\n")
+                    exit()
+                else:
+                    os.system('cls')
+                    print("\nThat is not a valid option.\n")
+        def showAccountMenu():
+            pass
+        def run():
+            showMainMenu()
+            showAccountMenu()
+        run()
+
+class Bank:
+    def __init__(self):
+        self.__bankName = "The Greatest Bank"
+        self.__list_of_accounts = []
+    
+    def openAccount():
+        pass
+
+    def searchAccount():
+        pass
+
+class Account(Bank):
+    def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance):
+        self.__accountNumber = accountNumber
+        self.__accountHolderName = accountHolderName
+        self.__rateOfInterest = rateOfInterest
+        self.__currentBalance = currentBalance
+
+    def getAccountNumber(self):
+        return self.__accountNumber
+
+    def getAccountHolderName(self):
+        return self.__accountHolderName
+
+    def getRateOfInterest(self):
+        return self.__rateOfInterest
+    
+    def getCurrentBalance(self):
+        return self.__currentBalance
+
+
+    def setAccountNumber(self, accountNumber):
+        self.__accountNumber = accountNumber
+
+    def setAccountHolderName(self, accountHolderName):
+        self.__accountHolderName = accountHolderName
+
+    def setRateOfInterest(self, rateOfInterest):
+        self.__rateOfInterest = rateOfInterest
+    
+    def setCurrentBalance(self, currentBalance):
+        self.__currentBalance = currentBalance
+
+
+    def deposit(self, intended_deposit):
+        self.__currentBalance += intended_deposit
+
+    def withdraw(self, intended_withdrawal):
+        self.__currentBalance -= intended_withdrawal
+        if self.__currentBalance < 0:
+            self.__currentBalance += intended_withdrawal
+            return True
+
+class SavingsAccount(Account):
+    def __init__(self):
+        super().__init__()
+        self.__minimum_balance = 5000
+    
+    withdraw()
+
+
+
+
+class ChequingAccount(Account):
+    def __init__(self):
+        super().__init__()
+#! Program Initialization
+Program()
